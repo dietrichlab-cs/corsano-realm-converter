@@ -1,0 +1,14 @@
+{
+  "name": "corsano-realm-database-model",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "database-model.js",
+  "files": [
+    "database-model.js"
+  ],
+  "exports": {
+    ".": "./database-model.js"
+  },
+  "author": "Luca Leon Happel",
+  "license": "ISC"
+}
