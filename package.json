@@ -1,0 +1,11 @@
+{
+  "name": "corsano-realm-converter",
+  "version": "1.0.0",
+  "description": "Konvertiere die .realm Dateien, welche wir von Corsano bekommen in JSON um",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luca Leon Happel",
+  "license": "ISC"
+}
