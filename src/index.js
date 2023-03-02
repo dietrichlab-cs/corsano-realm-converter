@@ -28,7 +28,7 @@ async function main() {
 const realmConfig = (path) => ({
   path: process.argv[2],
   schema: Object.keys(dbm).map((key) => dbm[key]),
-  schemaVersion: 4,
+  schemaVersion: 5,
 })
 
 main()

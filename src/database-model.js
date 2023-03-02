@@ -1,3 +1,13 @@
+exports.EcgMeasurementModel = {
+  name: 'EcgMeasurementModel',
+  primaryKey: 'startTimestamp',
+  properties: {
+    startTimestamp: 'int',
+    endTimestamp: 'int?',
+    wiffFilename: 'string?'
+  }
+}
+
 exports.EmographySlotModel = {
   name: 'EmographySlotModel',
   primaryKey: 'timestamp',
@@ -68,19 +78,6 @@ exports.LocalSettingDB = {
   properties: {
     key: 'string',
     value: 'string'
-  }
-}
-
-exports.Measurement = {
-  name: 'Measurement',
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    address: 'string',
-    type: 'string',
-    startTimestamp: 'int',
-    endTimestamp: 'int?',
-    synced: 'bool'
   }
 }
 
