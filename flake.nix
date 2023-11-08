@@ -14,13 +14,14 @@
       let
         pkgs = import nixpkgs { inherit system; };
       in
-        rec {
-          devShells.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              nodejs
-              yarn
-            ];
-          };
-        }
-      );
+      rec {
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            nodejs
+            yarn
+            nodePackages.jshint
+          ];
+        };
+      }
+    );
 }

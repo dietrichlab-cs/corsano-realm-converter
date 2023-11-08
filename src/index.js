@@ -1,5 +1,6 @@
 const Realm = require("realm");
 const androidSchema = require("./android_realm_schema");
+const iosSchema = require("./ios_realm_schema");
 const fs = require("fs");
 
 async function main() {

@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "realm": "^11.3.1"
+  },
+  "jshintConfig": {
+    "esversion": 6
   }
 }
