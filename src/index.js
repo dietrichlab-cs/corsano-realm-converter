@@ -36,7 +36,7 @@ async function main() {
 const realmConfig = (path) => ({
   path: process.argv[2],
   schema: Object.keys(androidSchema).map((key) => androidSchema[key]),
-  schemaVersion: 210,
+  schemaVersion: 5,
 });
 
 main();
