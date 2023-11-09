@@ -1,39 +1,48 @@
 const Realm = require("realm");
-const dbm = require("./database-model");
 const fs = require("fs");
 
-async function main() {
-  if (process.argv.length != 4) {
-    console.log("Usage: npm run start <realm-file> <output-dir>");
-    console.log(
-      "Output will be written to <output-dir>/MetricPpg.json, <output-dir>/StepsSummaryModel.json, etc.",
-    );
+async function main(platform) {
+  if (process.argv.length != 5) {
+    console.log("Usage: npm run start-ios/android <realm-file> <output-dir>");
     return;
   }
 
-  const outputDir = process.argv[3];
+  // Load the appropriate schema based on the platform
+  let dbm;
+  if (platform === "ios") {
+    dbm = require("./ios_realm_schema");
+  } else if (platform === "android") {
+    dbm = require("./android_realm_schema");
+  } else {
+    throw new Error(`Unsupported platform: ${platform}`);
+  }
+
+  const outputDir = process.argv[4];
   // ensure output directory exists
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
   }
 
-  // open the realm file which we want to convert to JSON
-  let realm = await Realm.open(realmConfig(process.argv[2]));
+  // Determine the schema version based on the platform
+  const schemaVersion = platform === "ios" ? 210 : 5;
 
-  // Go through all Objects in the realm file and convert them to JSON
-  for (const name of Object.keys(dbm).map((v) => dbm[v].name)) {
-    console.log(name);
-    await fs.promises.appendFile(
-      `${outputDir}/${name}.json`,
-      JSON.stringify(realm.objects(name)),
+  // Open the Realm file with the specified schema
+  let realm = await Realm.open({
+    path: process.argv[3],
+    schema: Object.values(dbm), // Use the schema from the imported dbm
+    schemaVersion: schemaVersion,
+  });
+
+  // Convert each model in the schema to JSON
+  for (const model of Object.values(dbm)) {
+    console.log(model.name);
+    const objects = realm.objects(model.name);
+    await fs.promises.writeFile(
+      `${outputDir}/${model.name}.json`,
+      JSON.stringify(objects)
     );
   }
 }
 
-const realmConfig = (path) => ({
-  path: process.argv[2],
-  schema: Object.keys(dbm).map((key) => dbm[key]),
-  schemaVersion: 210,
-});
-
-main();
+// Call main with the platform argument (ios or android)
+main(process.argv[2]);
