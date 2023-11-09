@@ -10,9 +10,9 @@ async function main(platform) {
   // Load the appropriate schema based on the platform
   let dbm;
   if (platform === "ios") {
-    dbm = require("./ios-realm-schema");
+    dbm = require("./ios_realm_schema");
   } else if (platform === "android") {
-    dbm = require("./android-realm-schema");
+    dbm = require("./android_realm_schema");
   } else {
     throw new Error(`Unsupported platform: ${platform}`);
   }
@@ -24,7 +24,7 @@ async function main(platform) {
   }
 
   // Determine the schema version based on the platform
-  const schemaVersion = platform === 'ios' ? 210 : 5;
+  const schemaVersion = platform === "ios" ? 210 : 5;
 
   // Open the Realm file with the specified schema
   let realm = await Realm.open({
@@ -39,11 +39,10 @@ async function main(platform) {
     const objects = realm.objects(model.name);
     await fs.promises.writeFile(
       `${outputDir}/${model.name}.json`,
-      JSON.stringify(objects),
+      JSON.stringify(objects)
     );
   }
 }
 
 // Call main with the platform argument (ios or android)
 main(process.argv[2]);
-
