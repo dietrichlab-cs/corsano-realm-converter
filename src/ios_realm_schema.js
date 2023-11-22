@@ -507,7 +507,8 @@ exports.MetricECG = {
     date: 'date',
     fileName: 'string',
     patientId: 'string',
-    syncedCloud: 'bool'
+    syncedCloud: 'bool',
+    result: 'string'
   }
 }
 
@@ -1509,4 +1510,5 @@ exports.WorldTimer = {
     tzOffset: 'int'
   }
 }
+
 
