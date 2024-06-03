@@ -90,6 +90,20 @@ exports.EveningSurvey = {
   }
 }
 
+exports.ExtTemperatureValues = {
+  name: 'ExtTemperatureValues',
+  properties: {
+    date: 'date',
+    temperatureValue: 'double',
+    deviceName: 'string',
+    tzOffset: 'int',
+    isCelciusUnit: 'bool',
+    isUnderMedication: 'bool',
+    isUnderFever: 'bool',
+    readyForSync: 'bool'
+  }
+}
+
 exports.FilesAvailable = {
   name: 'FilesAvailable',
   properties: {
@@ -194,6 +208,10 @@ exports.MetricActivity = {
     respirationRateQuality: 'int',
     corsanoRespirationRate: 'int',
     corsanoRespirationRateQuality: 'int',
+    corsanoEnergyExpenditure: 'int',
+    gailAsym: 'int',
+    gailSpeed: 'int',
+    gailVariability: 'int',
     temp1: 'double',
     temp2: 'double',
     pha: 'int',
@@ -219,6 +237,9 @@ exports.MetricActivitySummery = {
     steps: 'int',
     distance: 'int',
     calories: 'double',
+    averageGaitAsymmetry: 'int',
+    averageGaitSpeed: 'int',
+    averageGaitVar: 'int',
     readyForSync: 'bool',
     slots: 'MetricActivitySummerySlot[]'
   }
@@ -231,6 +252,12 @@ exports.MetricActivitySummerySlot = {
     steps: 'int?',
     distance: 'int?',
     calories: 'double?',
+    gaitAsymmetry: 'int?',
+    gaitSpeed: 'int?',
+    gaitVar: 'int?',
+    allValuesGaitAsymmetry: 'string',
+    allValuesGaitSpeed: 'string',
+    allValuesGaitVar: 'string',
     isEdited: 'bool'
   }
 }
@@ -507,8 +534,8 @@ exports.MetricECG = {
     date: 'date',
     fileName: 'string',
     patientId: 'string',
-    syncedCloud: 'bool',
-    result: 'string'
+    result: 'string',
+    syncedCloud: 'bool'
   }
 }
 
@@ -710,6 +737,11 @@ exports.MetricInternalTemprature = {
     date: 'date',
     skinTemp: 'double',
     greenTechValue: 'double',
+    accX: 'double',
+    accY: 'double',
+    accZ: 'double',
+    pulseRate: 'double',
+    cbt: 'double',
     readyForSync: 'bool'
   }
 }
@@ -805,6 +837,7 @@ exports.MetricParsedECGSummary = {
   properties: {
     id: 'int',
     date: 'date',
+    recordStartTimestamp: 'int',
     bpm: 'int',
     message: 'string',
     cardiolyseID: 'string',
@@ -1126,6 +1159,7 @@ exports.MetricWorkout = {
     respirationRateQuality: 'int',
     corsanoRespirationRate: 'int',
     corsanoRespirationRateQuality: 'int',
+    corsanoEnergyExpenditure: 'int',
     temp1: 'double',
     temp2: 'double',
     pha: 'int',
@@ -1143,6 +1177,9 @@ exports.MetricWorkout = {
     rawRespirationQuality: 'int',
     vo2Max: 'int',
     vo2MaxQuality: 'int',
+    gailAsym: 'int',
+    gailSpeed: 'int',
+    gailVariability: 'int',
     cfi: 'int',
     cfiQuality: 'int',
     syncedCloud: 'bool',
@@ -1424,6 +1461,7 @@ exports.UserProfile = {
     ppgAndAccOption: 'int',
     ppg2Option: 'int',
     bioZOption: 'int',
+    temperatureRawOption: 'int',
     emographyOption: 'int',
     spo2Option: 'int',
     opticalOption: 'int',
@@ -1510,5 +1548,4 @@ exports.WorldTimer = {
     tzOffset: 'int'
   }
 }
-
 
