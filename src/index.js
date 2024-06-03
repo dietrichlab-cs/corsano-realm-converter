@@ -24,7 +24,7 @@ async function main(platform) {
   }
 
   // Determine the schema version based on the platform
-  const schemaVersion = platform === "ios" ? 210 : 5;
+  const schemaVersion = platform === "ios" ? 219 : 5;
 
   // Open the Realm file with the specified schema
   let realm = await Realm.open({
