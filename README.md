@@ -1,4 +1,4 @@
 # corsano-realm-converter
 
 
-converter for realm files provided by corsano
+converter for realm files from  corsano wearables
