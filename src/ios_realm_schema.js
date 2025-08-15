@@ -36,6 +36,7 @@ exports.BPPeripheral = {
     uuid: 'string',
     deviceName: 'string',
     isActive: 'bool',
+    macAddress: 'string',
     dateConnected: 'date?'
   }
 }
@@ -45,7 +46,25 @@ exports.BloodPressureCheck = {
   properties: {
     morning: 'bool',
     midday: 'bool',
-    evening: 'bool'
+    evening: 'bool',
+    morningStatus: 'string',
+    middayStatus: 'string',
+    eveningStatus: 'string'
+  }
+}
+
+exports.BloodPressureCheckInits = {
+  name: 'BloodPressureCheckInits',
+  properties: {
+    firstMeasurementTimestamp: 'int',
+    secondMeasurementTimestamp: 'int',
+    thirdMeasurementTimestamp: 'int',
+    firstMeasurement: 'bool',
+    secondMeasurement: 'bool',
+    thirdMeasurement: 'bool',
+    firstMeasurementStatus: 'string',
+    secondMeasurementStatus: 'string',
+    thirdMeasurementStatus: 'string'
   }
 }
 
@@ -53,12 +72,63 @@ exports.BloodPressureValues = {
   name: 'BloodPressureValues',
   properties: {
     date: 'date',
+    timestamp: 'int',
     sbp: 'double',
     map: 'int',
     dbp: 'double',
+    morning: 'bool',
+    afternoon: 'bool',
+    evening: 'bool',
     hr: 'int',
+    braceletSuccess: 'bool',
     mmhg: 'double',
-    initM: 'bool'
+    initM: 'bool',
+    messageCloud: 'string',
+    successCloud: 'bool?',
+    statusCloud: 'string'
+  }
+}
+
+exports.CorRiskEvents = {
+  name: 'CorRiskEvents',
+  properties: {
+    uuid: 'string',
+    riskId: 'int',
+    riskName: 'string',
+    startDate: 'date',
+    endDate: 'date',
+    startTimestamp: 'int',
+    endTimestamp: 'int',
+    tzOffset: 'int',
+    dismissed: 'bool',
+    readyForSync: 'bool'
+  }
+}
+
+exports.CorsanoSleepSessions = {
+  name: 'CorsanoSleepSessions',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    recordDate: 'string',
+    tzOffset: 'int',
+    bedTime: 'date',
+    sleepOnSet: 'date',
+    wakeUpTime: 'date',
+    outOfBed: 'date'
+  }
+}
+
+exports.DayCounter = {
+  name: 'DayCounter',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    date: 'date',
+    serialNumber: 'string',
+    firstPairingDate: 'date?',
+    FWVersion: 'string',
+    readyForSync: 'bool'
   }
 }
 
@@ -87,6 +157,68 @@ exports.EveningSurvey = {
     work: 'string',
     whyNotWear: 'int[]',
     surveyHasBeenCompleted: 'bool'
+  }
+}
+
+exports.ExtBPMValues = {
+  name: 'ExtBPMValues',
+  properties: {
+    date: 'date',
+    bpmValue: 'double',
+    deviceName: 'string',
+    tzOffset: 'int',
+    isUnderMedication: 'bool',
+    readyForSync: 'bool'
+  }
+}
+
+exports.ExtBRPMValues = {
+  name: 'ExtBRPMValues',
+  properties: {
+    date: 'date',
+    brpmValue: 'double',
+    deviceName: 'string',
+    tzOffset: 'int',
+    isUnderMedication: 'bool',
+    readyForSync: 'bool'
+  }
+}
+
+exports.ExtHCPValues = {
+  name: 'ExtHCPValues',
+  properties: {
+    date: 'date',
+    dateBPM: 'date?',
+    dateSupplementalOxygen: 'date?',
+    dateConsciousnessLevel: 'date?',
+    dateBRPM: 'date?',
+    dateSpo2: 'date?',
+    dateTemperature: 'date?',
+    dateBP: 'date?',
+    type: 'string',
+    bpmValue: 'double',
+    supplementalOxygenValue: 'int',
+    consciousnessLevelValue: 'string',
+    spo2Value: 'double',
+    brpmValue: 'double',
+    temperatureValue: 'double',
+    sysValue: 'double',
+    diaValue: 'double',
+    tzOffset: 'int',
+    patientUUID: 'string',
+    readyForSync: 'bool'
+  }
+}
+
+exports.ExtSpo2Values = {
+  name: 'ExtSpo2Values',
+  properties: {
+    date: 'date',
+    spo2Value: 'double',
+    deviceName: 'string',
+    tzOffset: 'int',
+    isUnderMedication: 'bool',
+    readyForSync: 'bool'
   }
 }
 
@@ -149,7 +281,36 @@ exports.HappitechRawModel = {
     nsrProbability: 'double',
     goodQualityProbability: 'double',
     aFib: 'bool',
+    reportFile: 'string',
     aFibTimestamp: 'string',
+    readyToSync: 'bool'
+  }
+}
+
+exports.HappitechSingleMeasurement = {
+  name: 'HappitechSingleMeasurement',
+  properties: {
+    timestamp: 'int',
+    clientTimestamp: 'string',
+    heartRate: 'int',
+    goodIbiNumber: 'int',
+    avnn: 'int',
+    pnn50: 'int',
+    rmssd: 'int',
+    sdnn: 'int',
+    hta: 'string',
+    htaQ: 'int',
+    lf: 'int',
+    lfConfidence: 'int',
+    classification: 'string',
+    finalProbability: 'double',
+    afbProbability: 'double',
+    nsrProbability: 'double',
+    goodQualityProbability: 'double',
+    aFib: 'bool',
+    reportFile: 'string',
+    aFibTimestamp: 'string',
+    ppgDataObject: 'ppgRawModelObject[]',
     readyToSync: 'bool'
   }
 }
@@ -202,12 +363,14 @@ exports.MetricActivity = {
     corsanoLastSteps: 'int',
     activityType: 'int',
     speed: 'int',
+    activityCount: 'int',
     skinProximity: 'int',
     energyExp: 'int',
     respirationRate: 'int',
     respirationRateQuality: 'int',
     corsanoRespirationRate: 'int',
     corsanoRespirationRateQuality: 'int',
+    cardiacArrest: 'int',
     corsanoEnergyExpenditure: 'int',
     gailAsym: 'int',
     gailSpeed: 'int',
@@ -218,6 +381,13 @@ exports.MetricActivity = {
     phaQ: 'int',
     wearing: 'int',
     batteryLevel: 'int',
+    isCharging: 'bool',
+    nibpSystolic: 'int',
+    nibpDiastolic: 'int',
+    nibpSystolicLongTerm: 'int',
+    nibpDiastolicLongTerm: 'int',
+    nibpSystolicCombine: 'int',
+    nibpDiastolicCombine: 'int',
     syncedCloud: 'bool',
     bpmUpdated: 'bool',
     breathUpdated: 'bool',
@@ -240,6 +410,9 @@ exports.MetricActivitySummery = {
     averageGaitAsymmetry: 'int',
     averageGaitSpeed: 'int',
     averageGaitVar: 'int',
+    serialNumber: 'string',
+    firstPairingDate: 'date?',
+    FWVersion: 'string',
     readyForSync: 'bool',
     slots: 'MetricActivitySummerySlot[]'
   }
@@ -303,6 +476,9 @@ exports.MetricBPMSummery = {
     percentageEnduranceZone: 'int',
     percentagePerformanceZone: 'int',
     percentageMaxZone: 'int',
+    serialNumber: 'string',
+    firstPairingDate: 'date?',
+    FWVersion: 'string',
     readyForSync: 'bool',
     slots: 'MetricBPMSummerySlot[]'
   }
@@ -322,7 +498,13 @@ exports.MetricBPMSummerySlot = {
     bpmQ: 'int?',
     isEdited: 'bool',
     allValues: 'string',
-    allValuesQ: 'string'
+    allValuesQ: 'string',
+    allValuesIsCharging: 'string',
+    allValuesNotOnWrist: 'string',
+    allValuesIsLowBattery: 'string',
+    isCharging: 'bool',
+    notOnWrist: 'bool',
+    isLowBattery: 'bool'
   }
 }
 
@@ -352,7 +534,13 @@ exports.MetricBloodPressureSummarySlot = {
     sys: 'int?',
     dia: 'int?',
     allValuesSys: 'string',
-    allValuesDia: 'string'
+    allValuesDia: 'string',
+    allValuesIsCharging: 'string',
+    allValuesNotOnWrist: 'string',
+    allValuesIsLowBattery: 'string',
+    isCharging: 'bool',
+    notOnWrist: 'bool',
+    isLowBattery: 'bool'
   }
 }
 
@@ -379,6 +567,45 @@ exports.MetricBodyTempSummerySlot = {
   }
 }
 
+exports.MetricBraceletNIBP = {
+  name: 'MetricBraceletNIBP',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    preample: 'string',
+    version: 'int',
+    size: 'int',
+    timestamp: 'string',
+    date: 'date',
+    FPulseLength: 'double',
+    FSysUpstrokeTime: 'double',
+    FSysDownstrokeTime: 'double',
+    FW25Sdt: 'double',
+    FW25: 'double',
+    FW50Sdt: 'double',
+    FW50: 'double',
+    FW75Sdt: 'double',
+    FW75: 'double',
+    FW90Sdt: 'double',
+    FW90: 'double',
+    FH25Sdt: 'double',
+    FH50Sdt: 'double',
+    FHDiff: 'double',
+    FNotchDist: 'double',
+    FNotchIntensity: 'double',
+    FNotchAmp: 'double',
+    FDiasBumpSize: 'double',
+    FDiasBumpInts: 'double',
+    FReserved1: 'double',
+    FCount: 'int',
+    ONIBPSys: 'int',
+    ONIBPDia: 'int',
+    ONIBPN1: 'int',
+    ONIBPN2: 'int',
+    readyForSync: 'bool'
+  }
+}
+
 exports.MetricBreathSummery = {
   name: 'MetricBreathSummery',
   primaryKey: 'id',
@@ -401,7 +628,13 @@ exports.MetricBreathSummerySlot = {
     brpm: 'int?',
     brpmQ: 'int?',
     allValues: 'string',
-    allValuesQ: 'string'
+    allValuesQ: 'string',
+    allValuesIsCharging: 'string',
+    allValuesNotOnWrist: 'string',
+    allValuesIsLowBattery: 'string',
+    isCharging: 'bool',
+    notOnWrist: 'bool',
+    isLowBattery: 'bool'
   }
 }
 
@@ -426,7 +659,13 @@ exports.MetricCoreBodyTemperatureSummerySlot = {
     intervalDate: 'date',
     coreBodyTemperature: 'double?',
     allValues: 'string',
-    TempAlert: 'bool'
+    TempAlert: 'bool',
+    allValuesIsCharging: 'string',
+    allValuesNotOnWrist: 'string',
+    allValuesIsLowBattery: 'string',
+    isCharging: 'bool',
+    notOnWrist: 'bool',
+    isLowBattery: 'bool'
   }
 }
 
@@ -500,6 +739,73 @@ exports.MetricCorsanoBreathSummerySlot = {
     brpmQ: 'int?',
     allValues: 'string',
     allValuesQ: 'string'
+  }
+}
+
+exports.MetricCorsanoSleep = {
+  name: 'MetricCorsanoSleep',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    preample: 'string',
+    version: 'int',
+    timestamp: 'string',
+    date: 'date',
+    sleepStage: 'int',
+    movementLevel: 'int',
+    activityCount: 'int',
+    reserved1: 'int',
+    readyForSync: 'bool'
+  }
+}
+
+exports.MetricCorsanoSleepSummery = {
+  name: 'MetricCorsanoSleepSummery',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    recordDate: 'string',
+    startSession: 'date',
+    stopSession: 'date',
+    tzOffset: 'int',
+    totalSleepDuration: 'int',
+    timeToSleep: 'int',
+    timeToWakeUp: 'int',
+    consecutiveSleepSlotLightToRemove: 'int',
+    consecutiveSleepSlotDeepToRemove: 'int',
+    consecutiveSleepSlotRemToRemove: 'int',
+    totalSecsLight: 'int',
+    totalSecsDeep: 'int',
+    totalSecsAwake: 'int',
+    totalSecsREM: 'int',
+    totalSecsDept: 'int',
+    totalSecsIntensityAdjust: 'int',
+    totalSecsDeptAdjust: 'int',
+    totalDeepToLightTransitions: 'int',
+    totalDeepToREMTransitions: 'int',
+    totalLightToDeepTransitions: 'int',
+    totalLightToREMTransitions: 'int',
+    totalREMToDeepTransitions: 'int',
+    totalREMToLightTransitions: 'int',
+    totalSleepToAwakeTransitions: 'int',
+    totalAwakeToSleepTransitions: 'int',
+    readyForSync: 'bool',
+    cloudResultFailure: 'bool',
+    sleepRHR: 'int',
+    sleepRHRQuality: 'int',
+    slots: 'MetricCorsanoSleepSummerySlots[]'
+  }
+}
+
+exports.MetricCorsanoSleepSummerySlots = {
+  name: 'MetricCorsanoSleepSummerySlots',
+  primaryKey: 'timestamp',
+  properties: {
+    timestamp: 'string',
+    date: 'date',
+    sleepType: 'int',
+    isRejected: 'bool',
+    isEdited: 'bool'
   }
 }
 
@@ -746,6 +1052,20 @@ exports.MetricInternalTemprature = {
   }
 }
 
+exports.MetricNIBPSpot = {
+  name: 'MetricNIBPSpot',
+  properties: {
+    date: 'date',
+    systolicCombine: 'int',
+    diastolicCombine: 'int',
+    systolicShortTerm: 'int',
+    diastolicShortTerm: 'int',
+    systolicLongTerm: 'int',
+    diastolicLongTerm: 'int',
+    readyForSync: 'bool'
+  }
+}
+
 exports.MetricNewHRV = {
   name: 'MetricNewHRV',
   primaryKey: 'id',
@@ -906,6 +1226,7 @@ exports.MetricSleepSummery = {
     totalSleepToAwakeTransitions: 'int',
     totalAwakeToSleepTransitions: 'int',
     readyForSync: 'bool',
+    isEdited: 'bool',
     cloudResultFailure: 'bool',
     sleepRHR: 'int',
     sleepRHRQuality: 'int',
@@ -965,7 +1286,15 @@ exports.MetricSpo2SummerySlot = {
     spo2: 'double?',
     spo2Q: 'int?',
     allValues: 'string',
-    allValuesQ: 'string'
+    allValuesQ: 'string',
+    allValuesIsCharging: 'string',
+    allValuesNotOnWrist: 'string',
+    allValuesIsLowBattery: 'string',
+    isCharging: 'bool',
+    notOnWrist: 'bool',
+    isLowBattery: 'bool',
+    wearingNotOptimal: 'bool',
+    wearingNotOptimalCount: 'int'
   }
 }
 
@@ -1154,17 +1483,27 @@ exports.MetricWorkout = {
     corsanoLastSteps: 'int',
     activityType: 'int',
     speed: 'int',
+    activityCount: 'int',
     energyExp: 'int',
+    nibpSystolic: 'int',
+    nibpDiastolic: 'int',
+    nibpSystolicLongTerm: 'int',
+    nibpDiastolicLongTerm: 'int',
+    nibpSystolicCombine: 'int',
+    nibpDiastolicCombine: 'int',
     respirationRate: 'int',
     respirationRateQuality: 'int',
     corsanoRespirationRate: 'int',
     corsanoRespirationRateQuality: 'int',
+    cardiacArrest: 'int',
     corsanoEnergyExpenditure: 'int',
     temp1: 'double',
     temp2: 'double',
     pha: 'int',
     phaQ: 'int',
     wearing: 'int',
+    isCharging: 'bool',
+    batteryLevel: 'int',
     rawBpm: 'int',
     rawBpmQuality: 'int',
     rawEnergyEx: 'int',
@@ -1462,6 +1801,7 @@ exports.UserProfile = {
     ppg2Option: 'int',
     bioZOption: 'int',
     temperatureRawOption: 'int',
+    highPrecisionAccelerometerOption: 'int',
     emographyOption: 'int',
     spo2Option: 'int',
     opticalOption: 'int',
@@ -1499,6 +1839,13 @@ exports.UserProfile = {
     insightsDash: 'bool?',
     temperatureDash: 'bool?',
     workoutDash: 'bool?',
+    alarmSettingHeartRate: 'bool?',
+    alarmSettingSpo2: 'bool?',
+    alarmSettingRespirationRate: 'bool?',
+    alarmSettingBloodPressure: 'bool?',
+    alarmSettingTemperature: 'bool?',
+    alarmSettingTemp: 'bool?',
+    alarmSytemValue: 'string?',
     dashboard: 'int',
     braceletConfiguration: 'int'
   }
@@ -1537,8 +1884,8 @@ exports.WeightScaleValues = {
   }
 }
 
-exports.WorldTimer = {
-  name: 'WorldTimer',
+exports.WorldTimerRealmModel = {
+  name: 'WorldTimerRealmModel',
   properties: {
     tzName: 'string',
     tzCountry: 'string',
@@ -1546,6 +1893,14 @@ exports.WorldTimer = {
     tzAbrevation: 'string',
     tzDescription: 'string',
     tzOffset: 'int'
+  }
+}
+
+exports.ppgRawModelObject = {
+  name: 'ppgRawModelObject',
+  properties: {
+    timestamp: 'double',
+    value: 'double'
   }
 }
 

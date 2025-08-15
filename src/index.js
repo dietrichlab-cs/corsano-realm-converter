@@ -24,7 +24,9 @@ async function main(platform) {
   }
 
   // Determine the schema version based on the platform
-  const schemaVersion = platform === "ios" ? 219 : 5;
+  const schemaVersion = platform === "ios" ? 255 : 5;
+
+  console.log("opening realm file");
 
   // Open the Realm file with the specified schema
   let realm = await Realm.open({
@@ -39,7 +41,7 @@ async function main(platform) {
     const objects = realm.objects(model.name);
     await fs.promises.writeFile(
       `${outputDir}/${model.name}.json`,
-      JSON.stringify(objects)
+      JSON.stringify(objects),
     );
   }
 }
